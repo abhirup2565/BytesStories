@@ -1,16 +1,35 @@
 from blog import app,db,bcrypt
 from flask import render_template,url_for,request,flash,redirect
-from blog.form import RegistrationForm
+from blog.form import RegistrationForm,Login
 from blog.models import User
+from flask_login import login_user,login_required,logout_user,current_user
 
 @app.route('/')
 @app.route('/home')
 def home():
+    
     return render_template('home.html')
 
-@app.route('/login')
+@app.route('/login',methods=("POST","GET"))
 def login():
-    return render_template('login.html')
+    form = Login()
+    if request.method=="POST":
+        if form.validate_on_submit():
+            email=form.email.data
+            user=User.query.filter_by(email=email).first()
+            if user and bcrypt.check_password_hash( user.password,form.password.data):
+                login_user(user)
+                flash("logged in successfully","success")
+                return redirect(url_for('home'))
+            else:
+                flash("username or password incorrect")
+    return render_template('login.html',form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
 
 @app.route('/signup',methods=("POST","GET"))
 def signup():
@@ -20,13 +39,15 @@ def signup():
             user=User()
             user.username=form.username.data
             user.email=form.email.data
-            user.password=bcrypt.generate_password_hash(form.password.data)
+            user.password=bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             db.session.add(user)
             db.session.commit()
             flash("Your account has been created","success")
             return redirect(url_for('login'))
     return render_template('signup.html',form=form)
 
+
 @app.route('/account')
+@login_required
 def account():
     return render_template('account.html')
