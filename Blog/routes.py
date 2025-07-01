@@ -1,6 +1,7 @@
-from blog import app
-from flask import render_template
+from blog import app,db
+from flask import render_template,url_for,request,flash,redirect
 from blog.form import RegistrationForm
+from blog.models import User
 
 @app.route('/')
 @app.route('/home')
@@ -11,9 +12,19 @@ def home():
 def login():
     return render_template('login.html')
 
-@app.route('/signup')
+@app.route('/signup',methods=("POST","GET"))
 def signup():
     form = RegistrationForm()
+    if request.method=="POST":
+        if form.validate_on_submit:
+            user=User()
+            user.username=form.username.data
+            user.email=form.email.data
+            user.password=form.password.data
+            db.session.add(user)
+            db.session.commit()
+            flash("Your account has been created","success")
+            return redirect(url_for('signup'))
     return render_template('signup.html',form=form)
 
 @app.route('/account')
