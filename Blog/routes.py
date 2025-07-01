@@ -16,7 +16,7 @@ def login():
 def signup():
     form = RegistrationForm()
     if request.method=="POST":
-        if form.validate_on_submit and form.validate():
+        if form.validate_on_submit() and form.validate():
             user=User()
             user.username=form.username.data
             user.email=form.email.data
@@ -24,7 +24,7 @@ def signup():
             db.session.add(user)
             db.session.commit()
             flash("Your account has been created","success")
-            return redirect(url_for('signup'))
+            return redirect(url_for('login'))
     return render_template('signup.html',form=form)
 
 @app.route('/account')

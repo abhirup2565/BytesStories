@@ -3,39 +3,49 @@
 {% block content %}
 
 <form action="{{url_for('signup')}}" method="post" class="container-fluid">
+  {{ form.hidden_tag() }}
   <div>
     <label class="form-label">{{form.username.label}}</label>
     <div class="form-control">{{form.username}}</div>
-    {% for error in form.username.errors %}
-      {{ error }}
-      {% endfor %}
+    {% if form.username.errors %}
+        {% for error in form.username.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+    
     
   </div>
   <div >
     <label class="form-label">{{form.email.label}}</label>
     <div class="form-control">{{form.email}}</div>
-    {% for error in form.email.errors %}
-      {{ error }}
-      {% endfor %}
+    {% if form.email.errors %}
+        {% for error in form.email.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+    
     
   <div >
     <label class="form-label">{{form.password.label}}</label>
     <div class="form-control">{{form.password}}</div>
-   {% for error in form.password.errors %}
-      {{ error }}
-      {% endfor %}
+    {% if form.password.errors %}
+        {% for error in form.password.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+   
     
 
   <div >
     <label class="form-label">{{form.confirm_password.label}}</label>
     <div class="form-control">{{form.confirm_password}}</div>
-    {% for error in form.confirm_password.errors %}
-      {{ error }}
-      {% endfor %}
-
-    
-    
-  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    {% if form.confirm_password.errors %}
+        {% for error in form.confirm_password.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+{{form.submit}}
+  
 </form>
 {% endblock content %}
     
