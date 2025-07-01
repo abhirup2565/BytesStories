@@ -1,4 +1,4 @@
-from Blog import app
+from blog import app
 
 
 
