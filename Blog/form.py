@@ -8,3 +8,13 @@ class RegistrationForm(FlaskForm):
     email=EmailField('E-mail',validators=[DataRequired()])
     password=PasswordField('Password',validators=[DataRequired()])
     confirm_password=PasswordField('Confirm_password',validators=[DataRequired(),EqualTo(password)])
+
+    def username(self,username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError("Username already exist")
+        
+    def email(self,email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError("email already exist")

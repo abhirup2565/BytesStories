@@ -1,4 +1,4 @@
-from blog import app,db
+from blog import app,db,bcrypt
 from flask import render_template,url_for,request,flash,redirect
 from blog.form import RegistrationForm
 from blog.models import User
@@ -16,11 +16,11 @@ def login():
 def signup():
     form = RegistrationForm()
     if request.method=="POST":
-        if form.validate_on_submit:
+        if form.validate_on_submit and form.validate():
             user=User()
             user.username=form.username.data
             user.email=form.email.data
-            user.password=form.password.data
+            user.password=bcrypt.generate_password_hash(form.password.data)
             db.session.add(user)
             db.session.commit()
             flash("Your account has been created","success")
