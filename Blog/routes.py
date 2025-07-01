@@ -1,5 +1,6 @@
 from blog import app
 from flask import render_template
+from blog.form import RegistrationForm
 
 @app.route('/')
 @app.route('/home')
@@ -12,7 +13,8 @@ def login():
 
 @app.route('/signup')
 def signup():
-    return render_template('signup.html')
+    form = RegistrationForm()
+    return render_template('signup.html',form=form)
 
 @app.route('/account')
 def account():
