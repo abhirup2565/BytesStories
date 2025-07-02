@@ -1,6 +1,6 @@
 from blog import app,db,bcrypt
 from flask import render_template,url_for,request,flash,redirect
-from blog.form import RegistrationForm,Login
+from blog.form import RegistrationForm,Login,updateuser
 from blog.models import User
 from flask_login import login_user,login_required,logout_user,current_user
 
@@ -47,7 +47,20 @@ def signup():
     return render_template('signup.html',form=form)
 
 
-@app.route('/account')
+@app.route('/account',methods=("POST","GET"))
 @login_required
 def account():
-    return render_template('account.html')
+    form=updateuser()
+    if request.method=="POST":
+        if form.validate_on_submit() and form.validate():
+            user=current_user
+            user.username=form.username.data
+            user.email=form.email.data
+            db.session.commit()
+            flash("Your account has been updated","success")
+            return redirect(url_for('account'))
+    elif request.method=="GET":
+        if current_user.is_authenticated:
+            form.username.data=current_user.username
+            form.email.data=current_user.email
+    return render_template('account.html',form=form)
