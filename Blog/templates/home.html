@@ -1,5 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
-{{current_user.username}}
+
+
+
+<div class = container-fluid style="    margin-top: 20px;margin-left: auto;margin-right: auto;" >
+    {% for post in posts %}
+    <a href="#" style="all:unset"></a>
+    <div class="card mb-3 w-100 ">
+        <div class="row g-0">
+            <div class="col-md-4">
+            <img src="" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.content}}</p></a>
+            <p class="card-text"><small class="text-body-secondary">{{post.author.username}}</small></p>
+            {% if post.author.username==current_user.username  %}
+            <a href="{{url_for('update_post',post_id=post.id)}}" class="btn btn-primary">Update</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+            {% endif %}
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock content %}
 
