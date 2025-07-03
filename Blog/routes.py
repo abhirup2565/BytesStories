@@ -1,5 +1,5 @@
 from blog import app,db,bcrypt
-from flask import render_template,url_for,request,flash,redirect
+from flask import render_template,url_for,request,flash,redirect,abort
 from blog.form import RegistrationForm,Login,updateuser,New_post
 from blog.models import User,Post
 from flask_login import login_user,login_required,logout_user,current_user
@@ -7,8 +7,8 @@ from flask_login import login_user,login_required,logout_user,current_user
 @app.route('/')
 @app.route('/home')
 def home():
-    
-    return render_template('home.html')
+    posts=Post.query.order_by(Post.id.desc()).all()
+    return render_template('home.html',posts=posts)
 
 @app.route('/login',methods=("POST","GET"))
 def login():
@@ -76,3 +76,35 @@ def new_post():
             db.session.commit()
             return redirect(url_for('home'))
     return render_template('new_post.html',form=form)
+
+@app.route('/update_post/<int:post_id>',methods=("POST","GET"))
+@login_required
+def update_post(post_id):
+    post=Post.query.filter_by(id=post_id).first()
+    if post:
+        if current_user!=post.author:
+            abort(403)
+        form=New_post()
+        if request.method=="POST":
+            if form.validate_on_submit():
+                post.title=form.title.data
+                post.content=form.content.data
+                db.session.commit()
+                flash("Your post has been updated","success")
+                return redirect(url_for('update_post',post_id=post_id))
+        elif request.method=="GET":
+                form.title.data=post.title
+                form.content.data=post.content 
+    return render_template('update_post.html',form=form,post=post)
+
+@app.route('/delete_post/<int:post_id>')
+@login_required
+def delete_post(post_id):
+    post=Post.query.filter_by(id=post_id).first()
+    if post:
+        if current_user!=post.author:
+            abort(403)
+        db.session.delete(post)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return redirect(url_for('home'))
