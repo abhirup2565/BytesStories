@@ -1,7 +1,7 @@
 from blog import app,db,bcrypt
 from flask import render_template,url_for,request,flash,redirect
-from blog.form import RegistrationForm,Login,updateuser
-from blog.models import User
+from blog.form import RegistrationForm,Login,updateuser,New_post
+from blog.models import User,Post
 from flask_login import login_user,login_required,logout_user,current_user
 
 @app.route('/')
@@ -64,3 +64,15 @@ def account():
             form.username.data=current_user.username
             form.email.data=current_user.email
     return render_template('account.html',form=form)
+
+@app.route('/new_post',methods=("POST","GET"))
+@login_required
+def new_post():
+    form=New_post()
+    if request.method=='POST':
+        if form.validate_on_submit():
+            post=Post(title=form.title.data,content=form.content.data,user_id=current_user.id)
+            db.session.add(post)
+            db.session.commit()
+            return redirect(url_for('home'))
+    return render_template('new_post.html',form=form)
