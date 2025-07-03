@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SearchField,EmailField,ValidationError,SubmitField
+from wtforms import StringField,PasswordField,SearchField,EmailField,ValidationError,SubmitField,TextAreaField
 from wtforms.validators import DataRequired,Length,EqualTo
-from blog.models import User
+from blog.models import User,Post
 from flask_login import current_user
 
 class RegistrationForm(FlaskForm):
@@ -42,3 +42,8 @@ class updateuser(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError("email already taken")
+            
+class New_post(FlaskForm):
+    title = StringField('Title',validators=[DataRequired(),Length(min=4,max=60)])
+    content = TextAreaField('Content',validators=[DataRequired(),Length(min=4,max=200)])
+    submit=SubmitField("Post")

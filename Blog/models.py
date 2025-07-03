@@ -12,3 +12,11 @@ class User(db.Model,UserMixin):
     username = db.Column(db.String(60),unique=True)
     email=db.Column(db.String(120),index=True,unique=True) 
     password=db.Column(db.String(120),unique=True)
+    posts=db.relationship('Post',backref='author',lazy=True)
+
+class Post(db.Model,UserMixin):
+    id=db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(60),unique=True)
+    content=db.Column(db.String(120),index=True,unique=True)
+    user_id=db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) 
+    
