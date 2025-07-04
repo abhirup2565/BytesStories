@@ -3,11 +3,14 @@ from flask import render_template,url_for,request,flash,redirect,abort
 from blog.form import RegistrationForm,Login,updateuser,New_post
 from blog.models import User,Post
 from flask_login import login_user,login_required,logout_user,current_user
+from flask_sqlalchemy import pagination
 
 @app.route('/')
 @app.route('/home')
 def home():
-    posts=Post.query.order_by(Post.id.desc()).all()
+    page=request.args.get('page',1,type=int)
+    per_page=3
+    posts=Post.query.order_by(Post.id.desc()).paginate(page=page,per_page=per_page,error_out=False)
     return render_template('home.html',posts=posts)
 
 @app.route('/login',methods=("POST","GET"))

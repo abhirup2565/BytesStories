@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class = container-fluid style="    margin-top: 20px;margin-left: auto;margin-right: auto;" >
-    {% for post in posts %}
+    {% for post in posts.items %}
     <a href="#" style="all:unset"></a>
     <div class="card mb-3 w-100 ">
         <div class="row g-0">
@@ -45,5 +45,23 @@
   </div>
 </div>
 {% endfor %}
+
+
+<div class="pagination ">
+    {% for page in posts.iter_pages(left_edge=1, left_current=1, right_current=1, right_edge=1) %}
+      {% if page %}
+          {% if page != posts.page %}
+            <a href="{{ url_for("home", page=page) }}" class="page-item">{{ page }}</a>
+          {% else %}
+            <span class="page-item active">{{ page }}</span>
+          {% endif %}
+      {% else %}
+        <span class=ellipsis>…</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+  
+
+
 {% endblock content %}
 

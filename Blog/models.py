@@ -16,7 +16,7 @@ class User(db.Model,UserMixin):
 
 class Post(db.Model,UserMixin):
     id=db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(60),unique=True)
-    content=db.Column(db.String(120),index=True,unique=True)
+    title = db.Column(db.String(60))
+    content=db.Column(db.String(120))
     user_id=db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) 
     
