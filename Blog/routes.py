@@ -1,5 +1,5 @@
-import os,secrets
-from PIL import Image  
+import os
+from PIL import Image,ImageOps
 from blog import app,db,bcrypt
 from flask import render_template,url_for,request,flash,redirect,abort
 from blog.form import RegistrationForm,Login,updateuser,New_post
@@ -60,11 +60,12 @@ def save_pic(form_pic):
         picture_fn=name+f_ext
         picture_path=os.path.join(app.root_path,app.config['UPLOAD_FOLDER'],picture_fn)
         
-        output_size=(900,900)
+        output_size=(450,450)
         i = Image.open(form_pic)
-        i.thumbnail(output_size)
+        fixed_image = ImageOps.exif_transpose(i)
+        fixed_image.thumbnail(output_size)
 
-        i.save(picture_path)
+        fixed_image.save(picture_path)
         return picture_fn
 
 
@@ -98,9 +99,9 @@ def save_content__pic(form_pic,title):
         
         output_size=(500,500)
         i = Image.open(form_pic)
-        i.thumbnail(output_size)
-
-        i.save(picture_path)
+        fixed_image = ImageOps.exif_transpose(i)
+        fixed_image.thumbnail(output_size)
+        fixed_image.save(picture_path)
         return picture_fn
 
 @app.route('/new_post',methods=("POST","GET"))
