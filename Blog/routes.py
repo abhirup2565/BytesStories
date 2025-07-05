@@ -55,9 +55,9 @@ def signup():
     return render_template('signup.html',form=form)
 
 def save_pic(form_pic):
-        random_hex = secrets.token_hex(8)
+        name = current_user.username
         _,f_ext=os.path.splitext(form_pic.filename)
-        picture_fn=random_hex+f_ext
+        picture_fn=name+f_ext
         picture_path=os.path.join(app.root_path,app.config['UPLOAD_FOLDER'],picture_fn)
         
         output_size=(900,900)
@@ -90,13 +90,27 @@ def account():
        
     return render_template('account.html',form=form)
 
+def save_content__pic(form_pic,title):
+        title = title
+        _,f_ext=os.path.splitext(form_pic.filename)
+        picture_fn=title+f_ext
+        picture_path=os.path.join(app.root_path,app.config['UPLOAD_CONTENT_FOLDER'],picture_fn)
+        
+        output_size=(900,900)
+        i = Image.open(form_pic)
+        i.thumbnail(output_size)
+
+        i.save(picture_path)
+        return picture_fn
+
 @app.route('/new_post',methods=("POST","GET"))
 @login_required
 def new_post():
     form=New_post()
     if request.method=='POST':
         if form.validate_on_submit():
-            post=Post(title=form.title.data,content=form.content.data,user_id=current_user.id)
+            filepath=save_content__pic(form.content_pic.data,form.title.data)
+            post=Post(title=form.title.data,content=form.content.data,user_id=current_user.id,content_pic=filepath)
             db.session.add(post)
             db.session.commit()
             return redirect(url_for('home'))
@@ -112,14 +126,17 @@ def update_post(post_id):
         form=New_post()
         if request.method=="POST":
             if form.validate_on_submit():
+                filepath=save_content__pic(form.content_pic.data,form.title.data)
                 post.title=form.title.data
                 post.content=form.content.data
+                post.content_pic=filepath
                 db.session.commit()
                 flash("Your post has been updated","success")
                 return redirect(url_for('update_post',post_id=post_id))
         elif request.method=="GET":
                 form.title.data=post.title
                 form.content.data=post.content 
+                form.content_pic.data=post.content_pic
     return render_template('update_post.html',form=form,post=post)
 
 @app.route('/delete_post/<int:post_id>')
