@@ -96,7 +96,7 @@ def save_content__pic(form_pic,title):
         picture_fn=title+f_ext
         picture_path=os.path.join(app.root_path,app.config['UPLOAD_CONTENT_FOLDER'],picture_fn)
         
-        output_size=(900,900)
+        output_size=(500,500)
         i = Image.open(form_pic)
         i.thumbnail(output_size)
 

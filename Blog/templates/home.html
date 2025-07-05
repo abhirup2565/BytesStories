@@ -47,13 +47,13 @@
 {% endfor %}
 
 
-<div class="pagination ">
+<div class="pagination mb-2">
     {% for page in posts.iter_pages(left_edge=1, left_current=1, right_current=1, right_edge=1) %}
       {% if page %}
           {% if page != posts.page %}
-            <a href="{{ url_for("home", page=page) }}" class="page-item">{{ page }}</a>
+            <a href="{{ url_for("home", page=page) }}" class="btn btn-outline-info">{{ page }}</a>
           {% else %}
-            <span class="page-item active">{{ page }}</span>
+            <span class="btn btn-info">{{ page }}</span>
           {% endif %}
       {% else %}
         <span class=ellipsis>…</span>
