@@ -48,4 +48,5 @@ class updateuser(FlaskForm):
 class New_post(FlaskForm):
     title = StringField('Title',validators=[DataRequired(),Length(min=4,max=60)])
     content = TextAreaField('Content',validators=[DataRequired(),Length(min=4,max=200)])
+    content_pic=FileField("Profile Pic",validators=[DataRequired(),FileAllowed(['jpg','png','jpeg'])])
     submit=SubmitField("Post")
