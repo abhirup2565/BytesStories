@@ -1,9 +1,13 @@
+import os,secrets
+from PIL import Image  
 from blog import app,db,bcrypt
 from flask import render_template,url_for,request,flash,redirect,abort
 from blog.form import RegistrationForm,Login,updateuser,New_post
 from blog.models import User,Post
 from flask_login import login_user,login_required,logout_user,current_user
 from flask_sqlalchemy import pagination
+from werkzeug.datastructures import FileStorage
+
 
 @app.route('/')
 @app.route('/home')
@@ -43,11 +47,25 @@ def signup():
             user.username=form.username.data
             user.email=form.email.data
             user.password=bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            user.profile_pic="default.png"
             db.session.add(user)
             db.session.commit()
             flash("Your account has been created","success")
             return redirect(url_for('login'))
     return render_template('signup.html',form=form)
+
+def save_pic(form_pic):
+        random_hex = secrets.token_hex(8)
+        _,f_ext=os.path.splitext(form_pic.filename)
+        picture_fn=random_hex+f_ext
+        picture_path=os.path.join(app.root_path,app.config['UPLOAD_FOLDER'],picture_fn)
+        
+        output_size=(900,900)
+        i = Image.open(form_pic)
+        i.thumbnail(output_size)
+
+        i.save(picture_path)
+        return picture_fn
 
 
 @app.route('/account',methods=("POST","GET"))
@@ -55,7 +73,10 @@ def signup():
 def account():
     form=updateuser()
     if request.method=="POST":
-        if form.validate_on_submit() and form.validate():
+        if form.validate_on_submit():
+            if form.profile_pic.data:
+                filepath=save_pic(form.profile_pic.data)
+                current_user.profile_pic=filepath
             user=current_user
             user.username=form.username.data
             user.email=form.email.data
@@ -66,6 +87,7 @@ def account():
         if current_user.is_authenticated:
             form.username.data=current_user.username
             form.email.data=current_user.email
+       
     return render_template('account.html',form=form)
 
 @app.route('/new_post',methods=("POST","GET"))

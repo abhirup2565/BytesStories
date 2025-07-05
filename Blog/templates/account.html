@@ -4,12 +4,12 @@
 
 <div class="card mb-3 w-100 ">
         <div class="row g-0">
-            <div class="col-md-4">
-                <img src="/static/images/pm01.jpg" class="img-fluid rounded-start img-thumbnail rounded-end-circle" alt="...">
+            <div class="col-md-4 mt-4">
+                <img src="{{url_for('static', filename='images/'+ current_user.profile_pic or 'default.png')}}"class="img-fluid rounded-start img-thumbnail rounded-end-circle" alt="..."" >
             </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <form action="{{url_for('account')}}" method="post" class="container-fluid">
+                  <form action="{{url_for('account')}}" method="post" class="container-fluid" enctype="multipart/form-data">
                       {{ form.hidden_tag() }}
                       <div>
                         <label class="form-label">{{form.username.label}}</label>
@@ -31,6 +31,16 @@
                             {% endfor %}
                           {% endif %}
                       </div>
+                      <div >
+                        <label class="form-label">{{form.profile_pic.label}}</label>
+                        <div class="form-control">{{form.profile_pic}}</div>
+                        {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                                {{ error }}
+                            {% endfor %}
+                          {% endif %}
+                      </div>
+
                     {{form.submit(class="btn btn-primary mt-2")}}
                       
                     </form>
