@@ -1,0 +1,56 @@
+html{
+    overflow-x: hidden;
+}
+.body
+{
+    background-color: #FAF6E9;
+    color: #000;
+    align-items: center;
+}
+.Heading_p
+{
+
+}
+.grid_template
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 50px;
+    text-align: center;
+    justify-items: center;
+
+    @media(max-width: 1400px) {
+        grid-template-columns: 1fr 1fr 1fr ;
+    }
+    @media(max-width: 1060px) {
+        grid-template-columns: 1fr 1fr ;
+    }
+    @media(max-width: 700px) {
+        grid-template-columns: 1fr  ;
+    }
+}
+footer
+{
+    text-align: center;
+    background-color: black;
+    color: #FAF6E9;
+}
+a{
+    all: none;
+    text-decoration: none;
+}
+nav-link:hover{
+    background-color: #000;
+}
+.card_style
+{
+    width: 18rem; height: 18rem;border: none; background-color:#FEC001; color:black;
+    transition: all 200ms ease-in-out;
+}
+.card_style a{
+    all:none;
+}
+.card_style:hover
+{
+    transform: scale(1.05);
+}

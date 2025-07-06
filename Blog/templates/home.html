@@ -1,67 +1,64 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class = container-fluid style="    margin-top: 20px;margin-left: auto;margin-right: auto;" >
-    {% for post in posts.items %}
-    <a href="#" style="all:unset"></a>
-    <div class="card mb-3 w-100 ">
-        <div class="row g-0">
-            <div class="col-md-4">
-            <img src="{{url_for('static', filename='images/content/'+ post.content_pic or 'default.png')}}" class="img-fluid rounded-start" alt="...">
+<div class="body px-5">
+  <!-- This is Heading -->
+      <div class="Heading py-5">
+          <H1>Bytes Stories</H1>
+          <strong class="Heading_p">Stories from the World of Code</strong>
+      </div>
+
+    <!-- Cards -->    
+    <div class = container-fluid style="    margin-top: 20px;margin-left: auto;margin-right: auto;" >
+        
+        <div class=" grid_template pb-5">
+          {% for post in posts.items %}
+                <a href="">
+                    <div class="card card_style" >
+                        <img class="card-img-top" style="height:14rem;" src="{{url_for('static', filename='images/content/'+ post.content_pic or 'default.png')}}" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">{{post.title}}</p>
+                        </div>
+                    </div>
+                </a>
+        
+
+                <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Are you sure?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>The selected content would be deleted permanently.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{{url_for('delete_post',post_id=post.id)}}" class="btn btn-danger">Delete</a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">{{post.title}}</h5>
-                <p class="card-text">{{post.content}}</p></a>
-            <p class="card-text"><small class="text-body-secondary">{{post.author.username}}</small></p>
-            {% if post.author.username==current_user.username  %}
-            <a href="{{url_for('update_post',post_id=post.id)}}" class="btn btn-primary">Update</a>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
-                        Delete
-            </button>
-            {% endif %}
-            </div>
-            </div>
-        </div>
-    </div>
     
-</div>
-
-    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Are you sure?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>The selected content would be deleted permanently.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a href="{{url_for('delete_post',post_id=post.id)}}" class="btn btn-danger">Delete</a>
-      </div>
-    </div>
-  </div>
-</div>
 {% endfor %}
+</div>
+</div>
 
-
-<div class="pagination mb-2">
+<div class="pagination mb-2" style="justify-content: center;">
     {% for page in posts.iter_pages(left_edge=1, left_current=1, right_current=1, right_edge=1) %}
       {% if page %}
           {% if page != posts.page %}
-            <a href="{{ url_for("home", page=page) }}" class="btn btn-outline-info">{{ page }}</a>
+            <a href="{{ url_for("home", page=page) }}" class="btn btn-outline-warning">{{ page }}</a>
           {% else %}
-            <span class="btn btn-info">{{ page }}</span>
+            <span class="btn btn-warning">{{ page }}</span>
           {% endif %}
       {% else %}
         <span class=ellipsis>…</span>
       {% endif %}
     {% endfor %}
   </div>
-  
-
+ </div> 
 
 {% endblock content %}
 
