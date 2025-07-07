@@ -70,7 +70,7 @@
         <div class=" grid_template pb-5">
         {% for post in my_posts.items %}
                 <a href="">
-                    <div class="card card_style" >
+                    <div class="card card_style shadow" >
                         <img class="card-img-top" style="height:14rem;" src="{{url_for('static', filename='images/content/'+ post.content_pic or 'default.png')}}" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">{{post.title}}</p>
