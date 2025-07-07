@@ -7,6 +7,15 @@ from blog.models import User,Post
 from flask_login import login_user,login_required,logout_user,current_user
 from werkzeug.datastructures import FileStorage
 
+
+@app.route('/')
+@app.route('/home')
+def home():
+    page=request.args.get('page',1,type=int)
+    per_page=8
+    posts=Post.query.order_by(Post.id.desc()).paginate(page=page,per_page=per_page,error_out=False)
+    return render_template('home.html',posts=posts)
+
 @app.route('/login',methods=("POST","GET"))
 def login():
     login_form = Login()
@@ -33,31 +42,6 @@ def login():
             flash("Your account has been created","success")
             return redirect(url_for('login'))
     return render_template('login_signup.html',login_form=login_form,register_form=register_form)
-    
-
-
-@app.route('/')
-@app.route('/home')
-def home():
-    page=request.args.get('page',1,type=int)
-    per_page=8
-    posts=Post.query.order_by(Post.id.desc()).paginate(page=page,per_page=per_page,error_out=False)
-    return render_template('home.html',posts=posts)
-
-# @app.route('/login',methods=("POST","GET"))
-# def login():pass
-    # login_form = Login()
-    # if request.method=="POST":
-    #     if login_form.validate_on_submit():
-    #         email=login_form.email.data
-    #         user=User.query.filter_by(email=email).first()
-    #         if user and bcrypt.check_password_hash( user.password,login_form.password.data):
-    #             login_user(user)
-    #             flash("logged in successfully","success")
-    #             return redirect(url_for('home'))
-    #         else:
-    #             flash("username or password incorrect")
-    # return render_template('trial_home.html',login_form=login_form)
 
 @app.route('/logout')
 def logout():
@@ -65,21 +49,7 @@ def logout():
     return redirect(url_for('home'))
 
 
-# @app.route('/signup',methods=("POST","GET"))
-# def signup():pass
-#     register_form = RegistrationForm()
-#     if request.method=="POST":
-#         if register_form.validate_on_submit() and register_form.validate():
-#             user=User()
-#             user.username=register_form.username.data
-#             user.email=register_form.email.data
-#             user.password=bcrypt.generate_password_hash(register_form.password.data).decode('utf-8')
-#             user.profile_pic="default.png"
-#             db.session.add(user)
-#             db.session.commit()
-#             flash("Your account has been created","success")
-#             return redirect(url_for('login'))
-#     return render_template('trial_home.html',register_form=register_form)
+
 
 def save_pic(form_pic):
         name = current_user.username
