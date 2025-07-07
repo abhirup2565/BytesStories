@@ -9,8 +9,8 @@ from werkzeug.datastructures import FileStorage
 
 @app.route('/trial')
 def trial():
-    
-    return render_template('trial_home.html')
+    form=updateuser()
+    return render_template('trial_home.html',form=form)
 
 
 @app.route('/')
