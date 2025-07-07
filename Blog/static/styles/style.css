@@ -63,3 +63,60 @@ nav-link:hover{
     height: 150px;
     border: solid 4px #FEC001;
 }
+
+/* login/signup page */
+.container_login
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:90vh; 
+    width:100%;
+   
+}
+.main_container
+{
+    background-color: #000;
+    position: relative;
+    width: 100%;
+    height: 80%;
+    display: flex;
+     border-radius: 20px;
+    overflow: hidden;
+}
+.login_text
+{
+    background-color: #FEC001;
+    width:50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.login_text::before
+{
+    content: '';
+    background-color: #FEC001;
+    width:-300%;
+    height: 100%;
+}
+.form-box
+{
+    background-color: white;
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.form-box-form
+{
+    width: 100%;
+    
+}
+
