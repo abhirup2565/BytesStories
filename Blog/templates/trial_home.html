@@ -1,18 +1,26 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container_login container"style="">
+
+<div class="container_login body container"style="">
     <div class="main_container">
         <div class="toggle-box">
-            <div class="toggle-panel toggle-left"></div>
+            <div class="toggle-panel toggle-left">
+                <H1>Register</H1>
+            <button id="login_toggle" class="btn btn-dark mt-5 register-btn">Register</button>
+            </div>
         </div>
-        <div class="login_text">
-            <H1 >Register</H1>
-            <button id="login_toggle">Register</button>
+
+        <div class="toggle-box">
+            <div class="toggle-panel toggle-right">
+                <H1>Already Have An Account?</H1>
+            <button id="login_toggle" class="btn btn-dark mt-5 login-btn">Login</button>
+            </div>
         </div>
+        
 <!-- login form -->
-        <div class="form-box">
+        <div class="form-box login">
             <h1 >Login</h1>
-            <form action="{{url_for('login')}}" method="post" class="form-box-form">
+            <form action="{{url_for('login')}}" method="post" class="form-box-form login">
             {{ login_form.hidden_tag() }}
             
                 <label class="form-label mt-5">{{login_form.email.label}}</label>
@@ -35,9 +43,61 @@
             </form>
         </div>
 <!-- Registration form -->
- 
+ <div class="form-box register">
+<h1 >Register</h1>
+        <form action="{{url_for('signup')}}" method="post" class="form-box-form register">
+  {{ register_form.hidden_tag() }}
+  <div>
+    <label class="form-label mt-register_5">{{register_form.username.label}}</label>
+    <div class="">{{register_form.username}}</div>
+    {% if register_form.username.errors %}
+        {% for error in register_form.username.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+    
+    
+  </div>
+  <div >
+    <label class="form-label mt-5">{{register_form.email.label}}</label>
+    <div class="">{{register_form.email}}</div>
+    {% if register_form.email.errors %}
+        {% for error in register_form.email.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+    
+    
+  <div >
+    <label class="form-label mt-5">{{register_form.password.label}}</label>
+    <div class="">{{register_form.password}}</div>
+    {% if register_form.password.errors %}
+        {% for error in register_form.password.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+   
+    
+
+  <div >
+    <label class="form-label mt-5">{{register_form.confirm_password.label}}</label>
+    <div class="">{{register_form.confirm_password}}</div>
+    {% if register_form.confirm_password.errors %}
+        {% for error in register_form.confirm_password.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+{{register_form.submit(class="btn btn-warning mt-5")}}
+  
+</form>
+
+
+
+
 
     </div>
+</div>
+</div>
 </div>
 </div>
 
