@@ -1,6 +1,7 @@
 html{
     overflow-x: hidden;
 }
+/* home page */
 .body
 {
     background-color: #FAF6E9;
@@ -53,4 +54,12 @@ nav-link:hover{
 .card_style:hover
 {
     transform: scale(1.05);
+}
+
+/* account page */
+.account_img
+{
+    width: 150px;
+    height: 150px;
+    border: solid 4px #FEC001;
 }

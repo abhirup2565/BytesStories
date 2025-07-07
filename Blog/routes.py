@@ -9,8 +9,8 @@ from werkzeug.datastructures import FileStorage
 
 @app.route('/trial')
 def trial():
-    
-    return render_template('trial_home.html')
+    form=updateuser()
+    return render_template('trial_home.html',form=form)
 
 
 @app.route('/')
@@ -77,6 +77,9 @@ def save_pic(form_pic):
 @login_required
 def account():
     form=updateuser()
+    page=request.args.get('page',1,type=int)
+    per_page=4
+    my_posts=Post.query.filter_by(author=current_user).paginate(page=page,per_page=per_page,error_out=False)
     if request.method=="POST":
         if form.validate_on_submit():
             if form.profile_pic.data:
@@ -93,7 +96,7 @@ def account():
             form.username.data=current_user.username
             form.email.data=current_user.email
        
-    return render_template('account.html',form=form)
+    return render_template('account.html',form=form,my_posts=my_posts)
 
 def save_content__pic(form_pic,title):
         title = title
