@@ -1,57 +1,101 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-<div class="card mb-3 w-100 ">
+<div class="container">
+    <div class="py-5">
+<h1>Account Details </h1>
+<!-- Account Details Card -->
+<div class="card mb-3 w-100  py-2">
         <div class="row g-0">
-            <div class="col-md-4 mt-4">
-                <img src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}"class="img-fluid rounded-circle" alt="..."" >
+            <div class="col-md-4 py-2 text-center">
+                <img src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}"class="img-fluid rounded-circle account_img" alt="..."" >
             </div>
               <div class="col-md-8">
                 <div class="card-body">
                   <form action="{{url_for('account')}}" method="post" class="container-fluid" enctype="multipart/form-data">
                       {{ form.hidden_tag() }}
-                      <div>
-                        <label class="form-label">{{form.username.label}}</label>
-                        <div class="form-control">{{form.username}}</div>
+                       <div class="d-flex justify-content-start py-3">
+
+                      <div >
+                        <label class="">{{form.profile_pic.label}}</label>
+                        <div class="">{{form.profile_pic}}</div>
+                        {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                                {{ error }}
+                            {% endfor %}
+                          {% endif %}
+                      </div>
+
+                      <div class="" style="margin-right: 3.125rem;">
+                        <label class="">{{form.username.label}}</label>
+                        <div class="">{{form.username}}</div>
                         {% if form.username.errors %}
                             {% for error in form.username.errors %}
                                 {{ error }}
                             {% endfor %}
                           {% endif %}
-                        
-                        
-                      </div>
-                      <div >
-                        <label class="form-label">{{form.email.label}}</label>
-                        <div class="form-control">{{form.email}}</div>
-                        {% if form.email.errors %}
-                            {% for error in form.email.errors %}
-                                {{ error }}
-                            {% endfor %}
-                          {% endif %}
-                      </div>
-                      <div >
-                        <label class="form-label">{{form.profile_pic.label}}</label>
-                        <div class="form-control">{{form.profile_pic}}</div>
-                        {% if form.email.errors %}
-                            {% for error in form.email.errors %}
-                                {{ error }}
-                            {% endfor %}
-                          {% endif %}
                       </div>
 
-                    {{form.submit(class="btn btn-primary mt-2")}}
+                      <div >
+                        <label class="">{{form.email.label}}</label>
+                        <div class="">{{form.email}}</div>
+                        {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                                {{ error }}
+                            {% endfor %}
+                          {% endif %}
+                      </div>
+                      </div>
+
                       
+                    <div class="" style="text-align: center;">
+                    {{form.submit(class="btn btn-warning mt-2")}}
+                    </div>  
                     </form>
                 </div>
               </div>
         </div>
     </div>
-    
+    </div>
 </div>
+<hr>
+
+<!-- My posts -->
+ <div class="container">
+ <h1 class="py-5">My Posts</h1>
 
 
+<!-- My posts card -->
+    <div class = container-fluid style="    margin-top: 20px;margin-left: auto;margin-right: auto;" > 
+        <div class=" grid_template pb-5">
+        {% for post in my_posts.items %}
+                <a href="">
+                    <div class="card card_style" >
+                        <img class="card-img-top" style="height:14rem;" src="{{url_for('static', filename='images/content/'+ post.content_pic or 'default.png')}}" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">{{post.title}}</p>
+                        </div>
+                    </div>
+                </a>
+          {% endfor %}
+          </div>
+      </div>
+      
+<!-- Pagination -->
+  <div class="pagination mb-2" style="justify-content: center;">
+    {% for page in my_posts.iter_pages(left_edge=1, left_current=1, right_current=1, right_edge=1) %}
+      {% if page %}
+          {% if page != my_posts.page %}
+            <a href="{{ url_for("home", page=page) }}" class="btn btn-outline-warning">{{ page }}</a>
+          {% else %}
+            <span class="btn btn-warning">{{ page }}</span>
+          {% endif %}
+      {% else %}
+        <span class=ellipsis>…</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+ </div>
 
 {% endblock content %}
     
