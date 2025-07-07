@@ -2,18 +2,18 @@
 {% block content %}
 
 <div class="container_login body container"style="">
-    <div class="main_container">
+    <div class="main_container shadow">
         <div class="toggle-box">
             <div class="toggle-panel toggle-left">
-                <H1>Register</H1>
-            <button id="login_toggle" class="btn btn-dark mt-5 register-btn">Register</button>
+                <H1>Create your own blog for free!</H1>
+            <button id="login_toggle" class="btn btn-dark mt-5 register-btn">Register Now</button>
             </div>
         </div>
 
         <div class="toggle-box">
             <div class="toggle-panel toggle-right">
                 <H1>Already Have An Account?</H1>
-            <button id="login_toggle" class="btn btn-dark mt-5 login-btn">Login</button>
+            <button id="login_toggle" class="btn btn-dark mt-5 login-btn">Sign-in</button>
             </div>
         </div>
         
@@ -45,7 +45,7 @@
 <!-- Registration form -->
  <div class="form-box register">
 <h1 >Register</h1>
-        <form action="{{url_for('signup')}}" method="post" class="form-box-form register">
+        <form action="{{url_for('login')}}" method="post" class="form-box-form register">
   {{ register_form.hidden_tag() }}
   <div>
     <label class="form-label mt-register_5">{{register_form.username.label}}</label>
@@ -90,11 +90,6 @@
 {{register_form.submit(class="btn btn-warning mt-5")}}
   
 </form>
-
-
-
-
-
     </div>
 </div>
 </div>
