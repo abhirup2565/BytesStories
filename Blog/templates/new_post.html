@@ -4,7 +4,7 @@
 
 <form action="{{url_for('new_post')}}" method="post" class="container-fluid" enctype="multipart/form-data">
   {{ form.hidden_tag() }}
-  <div>
+  <div class"my-4">
     {{form.title.label(class="form-label")}}
     {{form.title(class="form-control")}}
     {% if form.title.errors %}
@@ -12,10 +12,8 @@
             {{ error }}
         {% endfor %}
       {% endif %}
-    
-    
   </div>
-  
+  <div class"my-4">
     {{form.content.label(class="form-label")}}
     {{form.content(class="form-control", sytle="height: 100px")}}
     {% if form.content.errors %}
@@ -23,7 +21,8 @@
             {{ error }}
         {% endfor %}
       {% endif %}
-
+    </div>
+    <div class"my-4">
     {{form.content_pic.label(class="form-label")}}
     {{form.content_pic(class="form-control", sytle="height: 100px")}}
     {% if form.content_pic.errors %}
@@ -31,9 +30,10 @@
             {{ error }}
         {% endfor %}
       {% endif %}
-    
-    {{form.submit(class="btn btn-primary mt-2")}}
-  
+    </div>
+    <div>
+    {{form.submit(class="btn btn-warning my-4")}}
+      </div>
 </form>
 {% endblock content %}
     

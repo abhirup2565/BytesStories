@@ -11,6 +11,8 @@ html{
     background-color: #f9ebc0;
     color: #000;
     align-items: center;
+    height: 95vh;
+    padding-bottom: 5px;
 }
 .Heading_p
 {
