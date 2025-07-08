@@ -196,6 +196,7 @@ nav-link:hover{
 {
     padding: 3%;
     width: 100%;
+    border: #FEC001 solid 5px;
 }
 .post_desc{
     padding: 3%;
@@ -219,4 +220,27 @@ nav-link:hover{
 .comment_title
 {
     display: flex;
+}
+.comment_display{
+    background-color: white;
+}
+.comment_card
+{
+    display: grid;
+    grid-template-columns: 60px auto;
+    grid-template-rows: 50px auto;
+    
+}
+.commenter_pic{
+    justify-self: center;
+    align-self: center;
+}
+.commenter_name{
+    justify-self: start;
+    align-self: center;
+}
+.commenter_comment{
+    grid-column: 2;
+    padding: 1px;
+    padding-right: 5%;
 }

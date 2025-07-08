@@ -5,16 +5,16 @@
     <div class="post_title pt-5">
 <h1>This Is Our Blog Title</h1> 
 </div>
-<div class="post_section ">
+<div class="post_section pb-5">
 <div class="post_image">
-<h1>This Is Our Blog Title</h1> 
+<h1>This Is Our Blog Image</h1> 
 </div>
 <div class="post_desc">
 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum 
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
 </div>
 </div>
-<div class="comment_main_container">
+<div class="comment_main_container mb-3">
     <div class="comment_section">
         <textarea name="" id="" rows="10" style="border: none;width: 100%;" placeholder="Add comment.."></textarea>
         <div class="comment_btn">
@@ -25,9 +25,60 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 <h3>Comments</h3>
 <div class="rounded-pill" style="text-align: center; background-color:#FEC001; height: 4%; width: 5%; color: #FAF6E9;"> <strong>5</strong> </div>
 </div>
-<p>pic</p>
-<p>name</p>
-<p>Comments</p>
+<div class="comment_display">
+
+    <div class="comment_card pt-3">
+    <div class="commenter_pic">
+        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
+    </div>
+    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
+    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
+    </div>
+
+    <!-- this is fake comments -->
+     <div class="comment_card pt-3">
+    <div class="commenter_pic">
+        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
+    </div>
+    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
+    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
+    </div>
+    
+
+    <div class="comment_card pt-3">
+    <div class="commenter_pic">
+        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
+    </div>
+    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
+    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
+    </div>
+
+    <div class="comment_card pt-3">
+    <div class="commenter_pic">
+        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
+    </div>
+    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
+    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
+    </div>
+
+    <div class="comment_card pt-3">
+    <div class="commenter_pic">
+        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
+    </div>
+    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
+    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
+    </div>
+
+    <div class="comment_card pt-3">
+    <div class="commenter_pic">
+        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
+    </div>
+    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
+    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
+    </div>
+
+</div>
+
 </div>
 </div>
 {% endblock content %}
