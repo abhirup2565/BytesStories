@@ -26,6 +26,11 @@ class Login(FlaskForm):
     email=EmailField('E-mail',validators=[DataRequired()])
     password=PasswordField('Password',validators=[DataRequired()])
     submit=SubmitField(label="Login",name="Login")
+    
+    def validate_email(self,email):
+            user = User.query.filter_by(email=email.data).first()
+            if not user:
+                raise ValidationError("No account registered with this email")
 
 class updateuser(FlaskForm):
     username = StringField('Username',validators=[DataRequired(),Length(min=4,max=60)])

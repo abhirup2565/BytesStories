@@ -22,7 +22,7 @@
             <h1 >Login</h1>
             <form action="{{url_for('login')}}" method="post" class="form-box-form login">
             {{ login_form.hidden_tag() }}
-            
+                <div>
                 <label class="form-label mt-5">{{login_form.email.label}}</label>
                 <div class=>{{login_form.email}}</div>
                 {% if login_form.email.errors %}
@@ -30,8 +30,8 @@
                         {{ error }}
                     {% endfor %}
                 {% endif %}
-             
-            
+                </div>
+                <div>
                 <label class="form-label mt-5">{{login_form.password.label}}</label>
                 <div class=>{{login_form.password}}</div>
                 {% if login_form.password.errors %}
@@ -40,6 +40,7 @@
                     {% endfor %}
                 {% endif %}
                 {{login_form.submit(class="btn btn-warning mt-5")}}
+                </div>
             </form>
         </div>
 <!-- Registration form -->
