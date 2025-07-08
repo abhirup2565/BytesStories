@@ -1,5 +1,5 @@
 html{
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 .shadow
 {
@@ -60,6 +60,12 @@ nav-link:hover{
     transform: scale(1.05);
 }
 
+.nav_img
+{
+    width: 150px;
+    height: 150px;
+    border: solid 4px #FEC001;
+}
 /* account page */
 .account_img
 {
