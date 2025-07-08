@@ -117,6 +117,11 @@ def new_post():
             return redirect(url_for('home'))
     return render_template('new_post.html',form=form)
 
+@app.route('/post/<int:post_id>',methods=("POST","GET"))
+@login_required
+def post(post_id):
+    return render_template('post.html')
+
 @app.route('/update_post/<int:post_id>',methods=("POST","GET"))
 @login_required
 def update_post(post_id):
