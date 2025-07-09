@@ -51,9 +51,9 @@ class updateuser(FlaskForm):
                 raise ValidationError("email already taken")
             
 class New_post(FlaskForm):
-    title = StringField('Title (60 characters)',validators=[DataRequired(),Length(min=4,max=60)])
-    content = TextAreaField('Content (120 characters)',validators=[DataRequired(),Length(min=4,max=120)])
-    content_pic=FileField("Content Pic",validators=[DataRequired(),FileAllowed(['jpg','png','jpeg'])])
+    title = StringField('Title (60 characters)',validators=[DataRequired(),Length(min=4,max=120)])
+    content = TextAreaField('Content (120 characters)',validators=[DataRequired(),Length(min=4,max=1200)])
+    content_pic=FileField("Content Pic",validators=[FileAllowed(['jpg','png','jpeg'])])
     submit=SubmitField("Post")
 
 class CommentForm(FlaskForm):

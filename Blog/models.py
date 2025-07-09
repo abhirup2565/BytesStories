@@ -18,9 +18,9 @@ class User(db.Model,UserMixin):
 
 class Post(db.Model,UserMixin):
     id=db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(60)) #120
-    content=db.Column(db.String(120)) #1200
-    content_pic=db.Column(db.String(100),nullable=False)
+    title = db.Column(db.String(120)) #120
+    content=db.Column(db.String(1200)) #1200
+    content_pic=db.Column(db.String(100),default="default.jpg")
     user_id=db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
     comments=db.relationship('Comment',backref='post',lazy=True) 
 

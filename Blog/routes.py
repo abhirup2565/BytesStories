@@ -110,8 +110,10 @@ def new_post():
     form=New_post()
     if request.method=='POST':
         if form.validate_on_submit():
-            filepath=save_content__pic(form.content_pic.data,form.title.data)
-            post=Post(title=form.title.data,content=form.content.data,user_id=current_user.id,content_pic=filepath)
+            post=Post(title=form.title.data,content=form.content.data,user_id=current_user.id)
+            if form.content_pic.data:
+                filepath=save_content__pic(form.content_pic.data,form.title.data)
+                post.content_pic=filepath
             db.session.add(post)
             db.session.commit()
             return redirect(url_for('home'))
@@ -144,10 +146,11 @@ def update_post(post_id):
         form=New_post()
         if request.method=="POST":
             if form.validate_on_submit():
-                filepath=save_content__pic(form.content_pic.data,form.title.data)
+                if form.content_pic.data:
+                    filepath=save_content__pic(form.content_pic.data,form.title.data)
+                    post.content_pic= filepath
                 post.title=form.title.data
                 post.content=form.content.data
-                post.content_pic=filepath
                 db.session.commit()
                 flash("Your post has been updated","success")
                 return redirect(url_for('update_post',post_id=post_id))
