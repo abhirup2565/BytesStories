@@ -6,6 +6,14 @@ html{
        -moz-box-sizing: border-box;
             box-sizing: border-box;
 }
+.mobile{
+    @media(max-width: 1000px)
+    {
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
 .fill
 {
     height:95vh;
@@ -200,6 +208,7 @@ nav-link:hover{
 .post_image
 {   
     border: #FEC001 solid 5px;
+    height: 100%;
 }
 .post_desc{
     padding: 3%;

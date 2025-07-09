@@ -32,7 +32,7 @@ def login():
             else:
                 flash("username or password incorrect")
 
-        elif "Register" in request.form and login_form.validate_on_submit():
+        elif "Register" in request.form and register_form.validate_on_submit():
             user=User()
             user.username=register_form.username.data
             user.email=register_form.email.data

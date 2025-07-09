@@ -15,7 +15,7 @@
   </div>
   <div class"my-4">
     {{form.content.label(class="form-label")}}
-    {{form.content(class="form-control", sytle="height: 100px")}}
+    {{form.content(class="form-control", style="height: 400px")}}
     {% if form.content.errors %}
         {% for error in form.content.errors %}
             {{ error }}
@@ -24,7 +24,7 @@
     </div>
     <div class"my-4">
     {{form.content_pic.label(class="form-label")}}
-    {{form.content_pic(class="form-control", sytle="height: 100px")}}
+    {{form.content_pic(class="form-control")}}
     {% if form.content_pic.errors %}
         {% for error in form.content_pic.errors %}
             {{ error }}

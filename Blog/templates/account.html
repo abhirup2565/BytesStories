@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<div >
 <div class="container">
     <div class="py-5">
 <h1>Account Details </h1>
@@ -14,7 +15,7 @@
                 <div class="card-body">
                   <form action="{{url_for('account')}}" method="post" class="container-fluid" enctype="multipart/form-data">
                       {{ form.hidden_tag() }}
-                       <div class="d-flex justify-content-start py-3">
+                       <div class="d-flex justify-content-start py-3 mobile">
 
                       <div >
                         <label class="">{{form.profile_pic.label}}</label>
@@ -28,7 +29,7 @@
 
                       <div class="" style="margin-right: 3.125rem;">
                         <label class="">{{form.username.label}}</label>
-                        <div class="">{{form.username}}</div>
+                        <div class="">{{form.username(style="width:100%")}}</div>
                         {% if form.username.errors %}
                             {% for error in form.username.errors %}
                                 {{ error }}
@@ -38,7 +39,7 @@
 
                       <div >
                         <label class="">{{form.email.label}}</label>
-                        <div class="">{{form.email}}</div>
+                        <div class="">{{form.email(style="width:100%")}}</div>
                         {% if form.email.errors %}
                             {% for error in form.email.errors %}
                                 {{ error }}
@@ -86,7 +87,7 @@
     {% for page in my_posts.iter_pages(left_edge=1, left_current=1, right_current=1, right_edge=1) %}
       {% if page %}
           {% if page != my_posts.page %}
-            <a href="{{ url_for("home", page=page) }}" class="btn btn-outline-warning">{{ page }}</a>
+            <a href="{{ url_for("account", page=page) }}" class="btn btn-outline-warning">{{ page }}</a>
           {% else %}
             <span class="btn btn-warning">{{ page }}</span>
           {% endif %}
@@ -96,6 +97,6 @@
     {% endfor %}
   </div>
  </div>
-
+</div>
 {% endblock content %}
     
