@@ -185,17 +185,16 @@ nav-link:hover{
 .post_section
 {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     width: 100%;
 }
 .post_title{
     display: flex;
     justify-content: center;
+    position: relative;
 }
 .post_image
-{
-    padding: 3%;
-    width: 100%;
+{   
     border: #FEC001 solid 5px;
 }
 .post_desc{
@@ -243,4 +242,9 @@ nav-link:hover{
     grid-column: 2;
     padding: 1px;
     padding-right: 5%;
+}
+.post_action_btn
+{
+    position: absolute;
+    left: 83%;
 }
