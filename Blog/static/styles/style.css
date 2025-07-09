@@ -1,6 +1,15 @@
 html{
     overflow-x: hidden;
 }
+* {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.fill
+{
+    height:95vh;
+}
 .shadow
 {
     box-shadow: 0px 3px 12px rgb(0, 0, 0,0.15);
@@ -11,7 +20,6 @@ html{
     background-color: #f9ebc0;
     color: #000;
     align-items: center;
-    height: 95vh;
     padding-bottom: 5px;
 }
 .Heading_p
@@ -174,7 +182,73 @@ nav-link:hover{
 }
 .form-box-form
 {
-    width: 100%;
-    
+    width: 100%; 
 }
 
+/* post page */
+.post_section
+{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+.post_title{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.post_image
+{   
+    border: #FEC001 solid 5px;
+}
+.post_desc{
+    padding: 3%;
+    
+}
+.comment_main_container
+{
+    background-color: #FAF6E9;
+    border-radius: 15px;
+    padding: 7%;
+}
+.comment_section
+{
+    background-color: #faf6e9ac;
+}
+.comment_btn
+{
+    display: flex;
+    justify-content: end;
+}
+.comment_title
+{
+    display: flex;
+}
+.comment_display{
+    background-color: white;
+}
+.comment_card
+{
+    display: grid;
+    grid-template-columns: 60px auto;
+    grid-template-rows: 50px auto;
+    
+}
+.commenter_pic{
+    justify-self: center;
+    align-self: center;
+}
+.commenter_name{
+    justify-self: start;
+    align-self: center;
+}
+.commenter_comment{
+    grid-column: 2;
+    padding: 1px;
+    padding-right: 5%;
+}
+.post_action_btn
+{
+    position: absolute;
+    left: 83%;
+}

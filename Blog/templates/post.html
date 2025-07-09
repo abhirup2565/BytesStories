@@ -1,6 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container ">
+    <div class="post_title pt-5">
+<h1>{{post.title}}</h1> 
+
 {% if post.author.username==current_user.username  %}
-                        <a href="{{url_for('update_post',post_id=post.id)}}" class="btn btn-primary">Update</a>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
-                                    Delete
-                        </button>
-                        {% endif %}
+<div class="post_action_btn">
+    <a href="{{url_for('update_post',post_id=post.id)}}" class="btn btn-warning">Update</a>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
+        Delete
+    </button>
+</div>
+{% endif %}
+
+</div>
+<div class="post_section pb-5">
+<div class="post_image">
+<img src="{{url_for('static',filename='images/content/'+post.content_pic)}}" alt="" style="width: 15.625rem;
+    height: 15.625rem;">
+</div>
+<div class="post_desc">
+<p>{{post.content}}</p>
+</div>
+</div>
+
+
+<div class="comment_main_container mb-3">
+    <div class="comment_section">
+        <form action="{{url_for('post',post_id=post.id)}}" method="post">
+            {{ form.hidden_tag() }}
+            
+        {{form.comment(rows="7" ,style="border: none;width: 100%;" ,placeholder="Add comment..")}}
+        <div class="comment_btn">
+
+        {{form.submit(class="btn btn-warning mt-5")}}
+        </div>
+        </form>
+    </div><hr>
+<div class="comment_title">
+<h3>Comments</h3>
+<div class="rounded-pill" style="text-align: center; background-color:#FEC001; height: 4%; width: 5%; color: #FAF6E9;"> <strong>{{DisplayComments.total}}</strong> </div>
+</div>
+<div class="comment_display">
+    {% for comment in DisplayComments%}
+        <div class="comment_card pt-3">
+        <div class="commenter_pic">
+            <img class=" img-fluid rounded-circle " style="width:2.5rem;height: 2.375rem;border: #FEC001 solid 5px;" src="{{url_for('static', filename='images/profile/'+ comment.commenter.profile_pic)}}" >
+        </div>
+        <div class="commenter_name"><strong>{{comment.commenter.username}}</strong></div>
+        <div class="commenter_comment"><p>{{comment.comment}}</p></div>
+        </div>
+    {%endfor%}
+</div>
+
+<!-- modal -->
+                <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Are you sure?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>The selected content would be deleted permanently.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{{url_for('delete_post',post_id=post.id)}}" class="btn btn-danger">Delete</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+</div>
+</div>
+{% endblock content %}

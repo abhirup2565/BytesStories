@@ -69,7 +69,7 @@
     <div class = container-fluid style="    margin-top: 20px;margin-left: auto;margin-right: auto;" > 
         <div class=" grid_template pb-5">
         {% for post in my_posts.items %}
-                <a href="">
+                <a href="{{url_for('post',post_id=post.id)}}">
                     <div class="card card_style shadow" >
                         <img class="card-img-top" style="height:14rem;" src="{{url_for('static', filename='images/content/'+ post.content_pic or 'default.png')}}" alt="Card image cap">
                         <div class="card-body">
