@@ -56,6 +56,6 @@ class New_post(FlaskForm):
     content_pic=FileField("Content Pic",validators=[DataRequired(),FileAllowed(['jpg','png','jpeg'])])
     submit=SubmitField("Post")
 
-class Comment(FlaskForm):
+class CommentForm(FlaskForm):
     comment = TextAreaField('comment',validators=[DataRequired(),Length(min=4,max=600)])
     submit=SubmitField("Comment")

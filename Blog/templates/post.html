@@ -28,67 +28,30 @@
 
 <div class="comment_main_container mb-3">
     <div class="comment_section">
-        <textarea name="" id="" rows="7" style="border: none;width: 100%;" placeholder="Add comment.."></textarea>
+        <form action="{{url_for('post',post_id=post.id)}}" method="post">
+            {{ form.hidden_tag() }}
+            
+        {{form.comment(rows="7" ,style="border: none;width: 100%;" ,placeholder="Add comment..")}}
         <div class="comment_btn">
-        <button class="btn btn-warning mt-2">Comment</button>
+
+        {{form.submit(class="btn btn-warning mt-5")}}
         </div>
+        </form>
     </div><hr>
 <div class="comment_title">
 <h3>Comments</h3>
-<div class="rounded-pill" style="text-align: center; background-color:#FEC001; height: 4%; width: 5%; color: #FAF6E9;"> <strong>5</strong> </div>
+<div class="rounded-pill" style="text-align: center; background-color:#FEC001; height: 4%; width: 5%; color: #FAF6E9;"> <strong>{{DisplayComments.total}}</strong> </div>
 </div>
 <div class="comment_display">
-
-    <div class="comment_card pt-3">
-    <div class="commenter_pic">
-        <img class=" img-fluid rounded-circle " style="width:2.5rem;height: 2.375rem;border: #FEC001 solid 5px;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
-    </div>
-    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
-    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
-    </div>
-
-    <!-- this is fake comments -->
-     <div class="comment_card pt-3">
-    <div class="commenter_pic">
-        <img class=" img-fluid rounded-circle" style="width:2.5rem;height: 2.375rem;border: #FEC001 solid 5px;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
-    </div>
-    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
-    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
-    </div>
-    
-
-    <div class="comment_card pt-3">
-    <div class="commenter_pic">
-        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
-    </div>
-    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
-    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
-    </div>
-
-    <div class="comment_card pt-3">
-    <div class="commenter_pic">
-        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
-    </div>
-    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
-    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
-    </div>
-
-    <div class="comment_card pt-3">
-    <div class="commenter_pic">
-        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
-    </div>
-    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
-    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
-    </div>
-
-    <div class="comment_card pt-3">
-    <div class="commenter_pic">
-        <img class=" img-fluid rounded-circle nav_img" style="width:2.5rem;height: 2.375rem;" src="{{url_for('static', filename='images/profile/'+ current_user.profile_pic or 'default.png')}}" >
-    </div>
-    <div class="commenter_name"><strong>Abhirup Singh</strong></div>
-    <div class="commenter_comment"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into</p></div>
-    </div>
-
+    {% for comment in DisplayComments%}
+        <div class="comment_card pt-3">
+        <div class="commenter_pic">
+            <img class=" img-fluid rounded-circle " style="width:2.5rem;height: 2.375rem;border: #FEC001 solid 5px;" src="{{url_for('static', filename='images/profile/'+ comment.commenter.profile_pic)}}" >
+        </div>
+        <div class="commenter_name"><strong>{{comment.commenter.username}}</strong></div>
+        <div class="commenter_comment"><p>{{comment.comment}}</p></div>
+        </div>
+    {%endfor%}
 </div>
 
 <!-- modal -->
