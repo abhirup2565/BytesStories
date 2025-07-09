@@ -1,4 +1,5 @@
 import os
+import secrets
 from PIL import Image,ImageOps
 from blog import app,db,bcrypt
 from flask import render_template,url_for,request,flash,redirect,abort
@@ -92,9 +93,9 @@ def account():
     return render_template('account.html',form=form,my_posts=my_posts)
 
 def save_content__pic(form_pic,title):
-        title = title
+        random_hex = secrets.token_hex(8)
         _,f_ext=os.path.splitext(form_pic.filename)
-        picture_fn=title+f_ext
+        picture_fn=random_hex+f_ext
         picture_path=os.path.join(app.root_path,app.config['UPLOAD_CONTENT_FOLDER'],picture_fn)
         
         output_size=(500,500)
