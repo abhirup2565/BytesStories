@@ -1,14 +1,14 @@
 import os
 import secrets
 from PIL import Image,ImageOps
-from blog import app
+from flask import current_app
 
 
 def save_content__pic(form_pic,title):
         random_hex = secrets.token_hex(8)
         _,f_ext=os.path.splitext(form_pic.filename)
         picture_fn=random_hex+f_ext
-        picture_path=os.path.join(app.root_path,app.config['UPLOAD_CONTENT_FOLDER'],picture_fn)
+        picture_path=os.path.join(current_app.root_path,current_app.config['UPLOAD_CONTENT_FOLDER'],picture_fn)
         
         output_size=(500,500)
         i = Image.open(form_pic)
