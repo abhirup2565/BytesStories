@@ -2,7 +2,7 @@ from flask import Blueprint
 
 posts=Blueprint('posts',__name__)
 
-@app.route('/new_post',methods=("POST","GET"))
+@posts.route('/new_post',methods=("POST","GET"))
 @login_required
 def new_post():
     form=New_post()
@@ -17,7 +17,7 @@ def new_post():
             return redirect(url_for('home'))
     return render_template('new_post.html',form=form)
 
-@app.route('/post/<int:post_id>',methods=("POST","GET"))
+@posts.route('/post/<int:post_id>',methods=("POST","GET"))
 @login_required
 def post(post_id):
     post=Post.query.filter_by(id=post_id).first()
@@ -34,7 +34,7 @@ def post(post_id):
            flash("There was an error","info") 
     return render_template('post.html',DisplayComments=DisplayComments,post=post,form=form)
 
-@app.route('/update_post/<int:post_id>',methods=("POST","GET"))
+@posts.route('/update_post/<int:post_id>',methods=("POST","GET"))
 @login_required
 def update_post(post_id):
     post=Post.query.filter_by(id=post_id).first()
@@ -58,7 +58,7 @@ def update_post(post_id):
                 form.content_pic.data=post.content_pic
     return render_template('update_post.html',form=form,post=post)
 
-@app.route('/delete_post/<int:post_id>')
+@posts.route('/delete_post/<int:post_id>')
 @login_required
 def delete_post(post_id):
     post=Post.query.filter_by(id=post_id).first()

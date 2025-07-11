@@ -3,7 +3,7 @@ from flask import Blueprint
 users=Blueprint('users',__name__)
 
 
-@app.route('/account',methods=("POST","GET"))
+@users.route('/account',methods=("POST","GET"))
 @login_required
 def account():
     form=updateuser()
@@ -27,7 +27,7 @@ def account():
             form.email.data=current_user.email   
     return render_template('account.html',form=form,my_posts=my_posts)
 
-@app.route('/login',methods=("POST","GET"))
+@app.users('/login',methods=("POST","GET"))
 def login():
     login_form = Login()
     register_form = RegistrationForm()
@@ -54,7 +54,7 @@ def login():
             return redirect(url_for('login'))
     return render_template('login_signup.html',login_form=login_form,register_form=register_form)
 
-@app.route('/logout')
+@app.users('/logout')
 def logout():
     logout_user()
     return redirect(url_for('home'))
