@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class"container" style="height:95vh;">
+<form action="{{url_for('posts.update_post',post_id=post.id)}}" method="post" class="container-fluid" enctype="multipart/form-data">
+  {{ form.hidden_tag() }}
+  <div>
+    <label class="form-label py-2">{{form.title.label}}</label>
+    <div class="py-2">{{form.title(class="form-control")}}</div>
+    {% if form.title.errors %}
+        {% for error in form.title.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+  </div>
+  <div >
+    <label class="form-label py-2">{{form.content.label}}</label>
+    <div class="py-2">{{form.content(class="form-control", style="height:400px")}}</div>
+    {% if form.content.errors %}
+        {% for error in form.content.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div>
+    {{form.content_pic.label(class="form-label py-2")}}
+    {{form.content_pic(class="py-2", sytle="height: 100px")}}
+    {% if form.content_pic.errors %}
+        {% for error in form.content_pic.errors %}
+            {{ error }}
+        {% endfor %}
+      {% endif %}
+      </div>
+      <div>
+    {{form.submit(class="btn btn-warning mt-3")}}
+    </div>
+</form>
+</div>
+{% endblock content %}
+    
