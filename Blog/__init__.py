@@ -8,9 +8,7 @@ from blog.config import Config
 db = SQLAlchemy()
 bcrypt=Bcrypt()
 login_manager=LoginManager()
-login_manager.login_view = "users.login"
-login_manager.login_message = "You need to login"
-login_manager.login_message_category = "info"
+
 
 
 
@@ -21,7 +19,9 @@ def create_app(config_class=Config):
     db.__init__(app)
     bcrypt.__init__(app)
     login_manager.__init__(app)
-
+    login_manager.login_view = "users.login"
+    login_manager.login_message = "You need to login"
+    login_manager.login_message_category = "info"
     from blog.users.routes import users
     from blog.posts.routes import posts
     from blog.main.routes import main
