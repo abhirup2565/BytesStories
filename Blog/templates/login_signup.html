@@ -20,7 +20,7 @@
 <!-- login form -->
         <div class="form-box login">
             <h1 >Login</h1>
-            <form action="{{url_for('login')}}" method="post" class="form-box-form login">
+            <form action="{{url_for('users.login')}}" method="post" class="form-box-form login">
             {{ login_form.hidden_tag() }}
                 <div>
                 <label class="form-label mt-5">{{login_form.email.label}}</label>
@@ -46,7 +46,7 @@
 <!-- Registration form -->
  <div class="form-box register">
 <h1 >Register</h1>
-        <form action="{{url_for('login')}}" method="post" class="form-box-form register">
+        <form action="{{url_for('users.login')}}" method="post" class="form-box-form register">
   {{ register_form.hidden_tag() }}
   <div>
     <label class="form-label mt-register_5">{{register_form.username.label}}</label>

@@ -1,4 +1,11 @@
-from flask import Blueprint
+
+from blog import db,bcrypt
+from flask import render_template,url_for,request,flash,redirect,Blueprint
+from blog.users.form import RegistrationForm,Login,updateuser
+from blog.users.utility import save_pic
+from blog.models import User,Post
+from flask_login import login_user,login_required,logout_user,current_user
+
 
 users=Blueprint('users',__name__)
 
@@ -20,14 +27,14 @@ def account():
             user.email=form.email.data
             db.session.commit()
             flash("Your account has been updated","success")
-            return redirect(url_for('account'))
+            return redirect(url_for('users.account'))
     elif request.method=="GET":
         if current_user.is_authenticated:
             form.username.data=current_user.username
             form.email.data=current_user.email   
     return render_template('account.html',form=form,my_posts=my_posts)
 
-@app.users('/login',methods=("POST","GET"))
+@users.route('/login',methods=("POST","GET"))
 def login():
     login_form = Login()
     register_form = RegistrationForm()
@@ -38,7 +45,7 @@ def login():
             if user and bcrypt.check_password_hash( user.password,login_form.password.data):
                 login_user(user)
                 flash("logged in successfully","success")
-                return redirect(url_for('home'))
+                return redirect(url_for('main.home'))
             else:
                 flash("username or password incorrect")
 
@@ -51,10 +58,10 @@ def login():
             db.session.add(user)
             db.session.commit()
             flash("Your account has been created","success")
-            return redirect(url_for('login'))
+            return redirect(url_for('users.login'))
     return render_template('login_signup.html',login_form=login_form,register_form=register_form)
 
-@app.users('/logout')
+@users.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('home'))
+    return redirect(url_for('main.home'))

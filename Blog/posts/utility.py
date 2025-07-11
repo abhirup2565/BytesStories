@@ -1,3 +1,9 @@
+import os
+import secrets
+from PIL import Image,ImageOps
+from blog import app
+
+
 def save_content__pic(form_pic,title):
         random_hex = secrets.token_hex(8)
         _,f_ext=os.path.splitext(form_pic.filename)

@@ -1,3 +1,9 @@
+import os
+from PIL import Image,ImageOps
+from blog import app
+from flask_login import current_user
+
+
 def save_pic(form_pic):
         name = current_user.username
         _,f_ext=os.path.splitext(form_pic.filename)

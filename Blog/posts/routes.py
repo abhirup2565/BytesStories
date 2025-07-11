@@ -1,4 +1,11 @@
-from flask import Blueprint
+
+from blog import db
+from flask import render_template,url_for,request,flash,redirect,abort,Blueprint
+from blog.posts.form import New_post,CommentForm
+from blog.posts.utility import save_content__pic
+from blog.models import Post,Comment
+from flask_login import login_required,current_user
+
 
 posts=Blueprint('posts',__name__)
 
@@ -14,7 +21,7 @@ def new_post():
                 post.content_pic=filepath
             db.session.add(post)
             db.session.commit()
-            return redirect(url_for('home'))
+            return redirect(url_for('main.home'))
     return render_template('new_post.html',form=form)
 
 @posts.route('/post/<int:post_id>',methods=("POST","GET"))
@@ -29,7 +36,7 @@ def post(post_id):
             db.session.add(comment)
             db.session.commit()
             flash("Comment successfully posted","success")
-            return redirect(url_for('post',DisplayComments=DisplayComments,post_id=post.id,form=form))
+            return redirect(url_for('posts.post',DisplayComments=DisplayComments,post_id=post.id,form=form))
         else:
            flash("There was an error","info") 
     return render_template('post.html',DisplayComments=DisplayComments,post=post,form=form)
@@ -51,7 +58,7 @@ def update_post(post_id):
                 post.content=form.content.data
                 db.session.commit()
                 flash("Your post has been updated","success")
-                return redirect(url_for('update_post',post_id=post_id))
+                return redirect(url_for('posts.update_post',post_id=post_id))
         elif request.method=="GET":
                 form.title.data=post.title
                 form.content.data=post.content 
@@ -67,5 +74,5 @@ def delete_post(post_id):
             abort(403)
         db.session.delete(post)
         db.session.commit()
-        return redirect(url_for('home'))
-    return redirect(url_for('home'))
+        return redirect(url_for('main.home'))
+    return redirect(url_for('main.home'))

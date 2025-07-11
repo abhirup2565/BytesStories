@@ -1,3 +1,8 @@
+from flask_wtf import FlaskForm
+from wtforms import StringField,SubmitField,TextAreaField,FileField
+from wtforms.validators import DataRequired,Length
+from flask_wtf.file import FileAllowed
+
 
 class New_post(FlaskForm):
     title = StringField('Title',validators=[DataRequired(),Length(min=4,max=120)])

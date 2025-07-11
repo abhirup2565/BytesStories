@@ -7,7 +7,7 @@
 
 {% if post.author.username==current_user.username  %}
 <div class="post_action_btn">
-    <a href="{{url_for('update_post',post_id=post.id)}}" class="btn btn-warning">Update</a>
+    <a href="{{url_for('posts.update_post',post_id=post.id)}}" class="btn btn-warning">Update</a>
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
         Delete
     </button>
@@ -28,7 +28,7 @@
 
 <div class="comment_main_container mb-3">
     <div class="comment_section">
-        <form action="{{url_for('post',post_id=post.id)}}" method="post">
+        <form action="{{url_for('posts.post',post_id=post.id)}}" method="post">
             {{ form.hidden_tag() }}
             
         {{form.comment(rows="7" ,style="border: none;width: 100%;" ,placeholder="Add comment..")}}
@@ -67,7 +67,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="{{url_for('delete_post',post_id=post.id)}}" class="btn btn-danger">Delete</a>
+                    <a href="{{url_for('posts.delete_post',post_id=post.id)}}" class="btn btn-danger">Delete</a>
                   </div>
                 </div>
               </div>
