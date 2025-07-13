@@ -11,10 +11,26 @@ html{
     {
         display: flex;
         flex-direction: column;
-    }
-    
+    }  
 }
-
+.nocontent_home
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    justify-content: center;
+}
+.nocontent_account
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 30vh;
+    text-align: center;
+    justify-content: center;
+}
 .errors
 {
     height: 95vh;
@@ -208,6 +224,11 @@ nav-link:hover{
     display: flex;
     justify-content: start;
     width: 100%;
+    @media(max-width: 770px)
+    {
+        display: flex;
+        flex-direction: column;
+    }  
 }
 .post_title{
     display: flex;
@@ -218,6 +239,17 @@ nav-link:hover{
 {   
     border: #FEC001 solid 5px;
     height: 100%;
+}
+
+.post_image_img
+{
+    width: 15.625rem;
+    height: 15.625rem;
+    @media(max-width: 770px)
+    {
+        width: 100%;
+        height: 100%;
+    }
 }
 .post_desc{
     padding: 3%;
