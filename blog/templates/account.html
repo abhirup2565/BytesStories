@@ -68,7 +68,8 @@
 
 <!-- My posts card -->
     <div class = container-fluid style="    margin-top: 20px;margin-left: auto;margin-right: auto;" > 
-        <div class=" grid_template pb-5">
+      {% if posts%}  
+      <div class=" grid_template pb-5">
         {% for post in my_posts.items %}
                 <a href="{{url_for('posts.post',post_id=post.id)}}">
                     <div class="card card_style shadow" >
@@ -81,6 +82,11 @@
           {% endfor %}
           </div>
       </div>
+      {% else %}
+      <div class="nocontent_account">
+        <h1>No post to show</h1>
+      </div>
+      {% endif %}
       
 <!-- Pagination -->
   <div class="pagination mb-2" style="justify-content: center;">

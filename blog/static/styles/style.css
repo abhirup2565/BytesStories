@@ -23,6 +23,15 @@ html{
     text-align: center;
     justify-content: center;
 }
+.nocontent_account
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 30vh;
+    text-align: center;
+    justify-content: center;
+}
 .errors
 {
     height: 95vh;
